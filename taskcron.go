@@ -1,4 +1,4 @@
-// goCron : A Golang Job Scheduling Package.
+// taskcron : A Golang Job Scheduling Package.
 //
 // An in-process scheduler for periodic jobs that uses the builder pattern
 // for configuration. Schedule lets you run Golang functions periodically
@@ -16,7 +16,7 @@
 // All rights reserved.
 // Use of this source code is governed by a BSD-style .
 // license that can be found in the LICENSE file.
-package gocron
+package taskcron
 
 import (
 	"errors"
@@ -26,22 +26,24 @@ import (
 	"time"
 )
 
-// Time location, default set by the time.Local (*time.Location)
-var loc = time.Local
+var (
+	// Time location, default set by the time.Local (*time.Location)
+	loc = time.Local
+
+	// Map for the function task store
+	funcs = map[string]interface{}{}
+
+	// Map for function and  params of function
+	fparams = map[string]([]interface{}){}
+)
+
+// Max number of jobs, hack it if you need.
+const MAXJOBNUM = 10240
 
 // Change the time location
 func ChangeLoc(newLocation *time.Location) {
 	loc = newLocation
 }
-
-// Max number of jobs, hack it if you need.
-const MAXJOBNUM = 10000
-
-// Map for the function task store
-var funcs = map[string]interface{}{}
-
-// Map for function and  params of function
-var fparams = map[string]([]interface{}){}
 
 type Job struct {
 

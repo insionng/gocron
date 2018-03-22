@@ -1,10 +1,10 @@
-// Tests for gocron
-package gocron
+// Tests for taskcron
+package taskcron
 
 import (
+	"fmt"
 	"testing"
 	"time"
-	"fmt"
 )
 
 var err = 1
